@@ -1,0 +1,24 @@
+- Typical input data for Recommender Systems (RS)
+- Evaluation Metrics
+- Types of RS
+  - Non-personalized 
+  - personalized
+  	- Content-based filtering 
+  	- Collaborative filtering 
+  - Context-aware (CARS) extend collaborative filtering
+  - Hybrid Side information 
+- Item-content Matrix ICM
+- User-Rating Matrix URM
+- Different rating scales and types (implicit vs. explicit)
+- Biases and removal of biases
+- Evaluation methods of RS
+  - online vs offline
+  - Different quality Indicators
+- Dataset partitioning (training / validation split)
+- Missing as negative assumption 
+- Missing as random 
+- Ranking Metrics for RS
+- Content-based RS; Item content matrix ICM
+- Cosine Similarity and Pearson Correlation Coefficient
+- User-based Collaborative Filterting
+- Cold-start problem
