@@ -1,0 +1,228 @@
+1. Typical Input Data for Recommender Systems (RS)
+Hauptdatentypen:
+
+User-Item Interactions: Ratings, Käufe, Klicks, Views
+User Profile Data: Demographische Daten, Präferenzen, Verhalten
+Item Content Data: Features, Kategorien, Beschreibungen, Metadaten
+Context Data: Zeit, Ort, Gerät, soziale Situation
+Social Data: Freundschaften, soziale Netzwerke
+
+2. Evaluation Metrics
+Accuracy Metrics:
+
+MAE (Mean Absolute Error): Durchschnittlicher absoluter Fehler
+RMSE (Root Mean Square Error): Wurzel des mittleren quadratischen Fehlers
+Precision: Anteil relevanter Items unter den empfohlenen
+Recall: Anteil empfohlener Items unter allen relevanten
+F1-Score: Harmonisches Mittel aus Precision und Recall
+
+Ranking Metrics:
+
+NDCG (Normalized Discounted Cumulative Gain): Berücksichtigt Rangposition
+MAP (Mean Average Precision): Durchschnittliche Precision über alle Nutzer
+Hit Rate: Anteil der Nutzer, die mindestens ein relevantes Item erhalten
+MRR (Mean Reciprocal Rank): Durchschnittlicher reziproker Rang des ersten relevanten Items
+
+3. Types of Recommender Systems
+3.1 Non-personalized RS
+
+Popularity-based: Empfehlung der beliebtesten Items
+Trending: Aktuell populäre Items
+Seasonal: Zeitabhängige Empfehlungen
+Demographic: Basierend auf demografischen Gruppen
+
+3.2 Personalized RS
+Content-based Filtering
+
+Nutzt Item-Features und User-Präferenzen
+Item Content Matrix (ICM): Items × Features Matrix
+Empfiehlt ähnliche Items basierend auf bisherigen Präferenzen
+Vorteile: Keine Cold-Start-Probleme für neue Items, Transparenz
+Nachteile: Limited Diversity, benötigt gute Feature-Extraktion
+
+Collaborative Filtering
+
+User-based CF: Findet ähnliche Nutzer, empfiehlt deren bevorzugte Items
+Item-based CF: Empfiehlt Items, die ähnlich zu bereits bewerteten sind
+Matrix Factorization: SVD, NMF, Latent Factor Models
+Vorteile: Serendipity, keine Content-Analyse nötig
+Nachteile: Cold-Start-Problem, Sparsity, Skalierbarkeit
+
+3.3 Context-aware Recommender Systems (CARS)
+
+Erweitern Collaborative Filtering um Kontext-Dimensionen
+Pre-filtering: Kontext-Filter vor Empfehlung
+Post-filtering: Kontext-Filter nach Empfehlung
+Modeling: Kontext direkt im Modell integriert
+Beispiele: Zeit, Ort, Wetter, soziale Situation, Gerät
+
+3.4 Hybrid Systems
+
+Kombinieren verschiedene RS-Ansätze
+Weighted: Gewichtete Kombination der Scores
+Switching: Verschiedene Algorithmen je nach Situation
+Cascade: Sequenzielle Anwendung mehrerer Filter
+Mixed: Parallele Präsentation verschiedener Empfehlungen
+Feature Combination: Gemeinsame Feature-Nutzung
+
+4. Matrices in RS
+User-Rating Matrix (URM)
+
+Dimension: Users × Items
+Inhalt: Ratings, Kaufdaten, implizite Feedbacks
+Problem: Sehr sparse (wenige bekannte Werte)
+
+Item-Content Matrix (ICM)
+
+Dimension: Items × Features
+Inhalt: Genres, Kategorien, Tags, Beschreibungen
+Verwendung: Content-based Filtering, Cold-Start-Lösung
+
+5. Rating Scales and Types
+Explicit Ratings
+
+Numerical: 1-5 Sterne, 1-10 Punkte
+Binary: Like/Dislike, Thumbs up/down
+Ordinal: Sehr schlecht bis sehr gut
+Charakteristik: Direktes Nutzerfeedback, aber oft sparse
+
+Implicit Ratings
+
+Purchase Data: Kauf = positive Präferenz
+Click Data: Klicks als Interesse-Indikator
+View Time: Verweildauer als Relevanz-Maß
+Charakteristik: Abundanter, aber noisier und schwerer interpretierbar
+
+6. Biases and Bias Removal
+Types of Biases
+
+Selection Bias: Nutzer bewerten nur bestimmte Items
+Popularity Bias: Beliebte Items werden überrepräsentiert
+Position Bias: Items an besseren Positionen werden häufiger gewählt
+Exposure Bias: Nur sichtbare Items können bewertet werden
+Confirmation Bias: Nutzer bevorzugen bestätigende Informationen
+
+Bias Removal Techniques
+
+Inverse Propensity Scoring: Gewichtung basierend auf Wahrscheinlichkeiten
+Debiased Learning: Spezielle Loss-Funktionen
+Causal Inference: Berücksichtigung kausaler Zusammenhänge
+Fairness Constraints: Explizite Fairness-Bedingungen
+
+7. Evaluation Methods
+Online vs. Offline Evaluation
+Offline Evaluation
+
+Verwendung historischer Daten
+Kontrollierte Umgebung
+Schnell und kostengünstig
+Metriken: Accuracy, Ranking-Metriken
+Problem: Möglicherweise nicht repräsentativ für reale Nutzung
+
+Online Evaluation
+
+A/B Tests mit echten Nutzern
+Reale Nutzerinteraktionen
+Metriken: Click-through Rate, Conversion Rate, User Engagement
+Vorteile: Realistic, business-relevant
+Nachteile: Teuer, zeitaufwändig, ethische Überlegungen
+
+Quality Indicators
+
+Accuracy: Wie genau sind die Vorhersagen?
+Diversity: Wie vielfältig sind die Empfehlungen?
+Novelty: Werden neue/unbekannte Items empfohlen?
+Serendipity: Überraschende aber relevante Empfehlungen
+Coverage: Welcher Anteil des Item-Katalogs wird empfohlen?
+Scalability: Wie gut skaliert das System?
+
+8. Dataset Partitioning
+Training/Validation Split
+
+Temporal Split: Chronologische Aufteilung (z.B. 80% für Training)
+Random Split: Zufällige Aufteilung der Ratings
+User-based Split: Komplette Nutzer in Train/Test
+Leave-One-Out: Ein Rating pro Nutzer für Test
+K-Fold Cross-Validation: Mehrfache Aufteilung für robuste Evaluation
+
+Considerations
+
+Data Leakage: Vermeidung von Future-Information im Training
+Cold-Start Simulation: Separate Sets für neue User/Items
+Temporal Dynamics: Berücksichtigung zeitlicher Veränderungen
+
+9. Missing Data Assumptions
+Missing as Negative (MAN)
+
+Annahme: Nicht bewertete Items sind negativ/nicht relevant
+Verwendung: Implicit Feedback Scenarios
+Problem: Oft zu strikt, viele falsch-negative
+Beispiel: Nicht gekaufte Produkte = nicht interessant
+
+Missing at Random (MAR)
+
+Annahme: Fehlende Werte sind zufällig verteilt
+Verwendung: Traditionelle Collaborative Filtering
+Behandlung: Ignorieren der fehlenden Werte
+Problem: Selection Bias wird nicht berücksichtigt
+
+10. Similarity Measures
+Cosine Similarity
+cos(u,v) = (u · v) / (||u|| × ||v||)
+
+Range: [-1, 1] oder [0, 1] für positive Ratings
+Eigenschaften: Ignoriert Magnitude, fokussiert auf Winkel
+Verwendung: Text-basierte Features, sparse Vektoren
+
+Pearson Correlation Coefficient
+pearson(u,v) = Σ((r_ui - μ_u)(r_vi - μ_v)) / sqrt(Σ(r_ui - μ_u)² × Σ(r_vi - μ_v)²)
+
+Range: [-1, 1]
+Eigenschaften: Normalisiert um Nutzer-Mittelwerte
+Vorteil: Kompensiert unterschiedliche Rating-Skalen
+Verwendung: User-based Collaborative Filtering
+
+11. User-based Collaborative Filtering
+Algorithm Steps
+
+Similarity Calculation: Berechne Ähnlichkeit zwischen Nutzern
+Neighborhood Selection: Finde k ähnlichste Nutzer
+Rating Prediction: Gewichteter Durchschnitt der Nachbar-Ratings
+Recommendation: Empfehle Items mit höchsten vorhergesagten Ratings
+
+Prediction Formula
+r̂_ui = μ_u + (Σ_v∈N(u) sim(u,v) × (r_vi - μ_v)) / Σ_v∈N(u) |sim(u,v)|
+Challenges
+
+Sparsity: Wenige gemeinsame bewertete Items
+Scalability: O(n²) Ähnlichkeitsberechnungen
+Cold-Start: Neue Nutzer ohne Ratings
+
+12. Cold-Start Problem
+Types of Cold-Start
+
+New User: Nutzer ohne bisherige Ratings/Interaktionen
+New Item: Items ohne bisherige Ratings
+New System: Komplett neues System ohne Daten
+
+Solutions
+For New Users:
+
+Demografische Empfehlungen
+Popularity-based Empfehlungen
+Onboarding mit expliziten Präferenzen
+Social Information nutzen
+
+For New Items:
+
+Content-based Filtering
+Hybrid Approaches
+Expert Recommendations
+Item Features nutzen
+
+For New Systems:
+
+External Data importieren
+Crowdsourcing
+Content-based Bootstrapping
+Demographic Filtering
